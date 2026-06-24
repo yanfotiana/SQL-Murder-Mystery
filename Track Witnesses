@@ -1,0 +1,12 @@
+with witnesses as (select *
+from person
+where address_street_name = "Franklin Ave" and name like "Annabel%"
+or address_street_name = "Northwestern Dr"
+order by address_street_name, address_number desc
+limit 2
+)
+
+select *
+from interview i
+join witnesses w
+on i.person_id=w.id
