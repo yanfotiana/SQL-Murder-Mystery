@@ -1,0 +1,21 @@
+with main_suspects as (select 
+					   p.id as person_id,
+					   p.name,
+					   p.license_id,
+					   d.age,
+					   d.hair_color,
+					   d.gender,
+					   d.car_make,
+					   d.car_model
+from person p
+join drivers_license d
+	on p.license_id=d.id
+where d.height < 67 and d.height > 65
+	and d.hair_color = "red" and d.gender = "female" and d.car_make = "Tesla" and d.car_model = "Model S"
+)
+
+select *
+from facebook_event_checkin f
+join main_suspects m
+on f.person_id=m.person_id
+where f.event_name = "SQL Symphony Concert" and f.date like "201712%"
