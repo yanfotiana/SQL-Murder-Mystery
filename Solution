@@ -1,0 +1,25 @@
+With suspects as (select 
+				g.id as membership_id,
+				g.person_id,
+				p.name,
+				g.membership_status,
+				d.age,
+				d.gender,
+				d.height,
+				d.eye_color,
+				d.hair_color,
+				p.license_id,
+				d.plate_number
+from get_fit_now_member g
+join person p
+on g.person_id=p.id
+join drivers_license d
+on p.license_id=d.id
+where d.plate_number like "%H42W%"
+)
+
+select *
+from get_fit_now_check_in ge
+join suspects s
+on ge.membership_id=s.membership_id
+where ge.check_in_date = 20180109
